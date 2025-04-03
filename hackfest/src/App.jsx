@@ -8,11 +8,6 @@ import Register from './components/Register'
 import About from './components/About'
 
 function App() {
-  const [showLogin, setShowLogin] = useState(true)
-
-  const toggleForm = () => {
-    setShowLogin(!showLogin)
-  }
 
   const router = createBrowserRouter([
     {
