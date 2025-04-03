@@ -11,15 +11,16 @@ export default function Navbar() {
             logo
           </div>
           <div className='options'>
-            
             <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/sellwaste">Sell waste</NavLink></li>
+            <li><NavLink to="/buywaste">Buy waste</NavLink></li>
+            <li><NavLink to="/orderdetail">Order details</NavLink></li>
             <li><NavLink to="/about">About</NavLink></li>
-            <li><NavLink to="/login">Login</NavLink></li>
-            <li><NavLink to="/register">Register</NavLink></li>
             
           </div>
           <div className='profile'>
-            profile
+          <li><NavLink to="/login">Login</NavLink></li>
+          <li><NavLink to="/register">Register</NavLink></li>
           </div>
           </div>
         </nav>

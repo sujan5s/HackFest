@@ -13,6 +13,7 @@ function Login({ onRegisterClick }) {
   const onSubmit = data => console.log(data);
   
   return (
+    <div className='logincenter'>
     <div className="wrapper">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Login</h1>
@@ -54,6 +55,7 @@ function Login({ onRegisterClick }) {
           </p>
         </div>
       </form>
+    </div>
     </div>
   );
 }

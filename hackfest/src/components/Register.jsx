@@ -16,6 +16,7 @@ function Register({ onLoginClick }) {
   };
 
   return (
+    <div className='registercenter'>
     <div className="wrapper">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Register</h1>
@@ -91,6 +92,7 @@ function Register({ onLoginClick }) {
           </p>
         </div>
       </form>
+    </div>
     </div>
   );
 }
