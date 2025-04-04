@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import './Register.css';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Register({ onLoginClick }) {
   const { 
     register, 
-    handleSubmit, 
     watch, 
     formState: { errors } 
   } = useForm();
@@ -16,18 +16,21 @@ function Register({ onLoginClick }) {
   const [username , setUsername] = useState('');
   const [email , setEmail] = useState('');
   const [password , setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const onSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('http://localhost:3001/register',{username, email, password})
-    .then(res => console.log(res))
+    .then(res => {console.log(res)
+    navigate('/login')
+    })
     .catch(err => console.log(err));
   };
 
   return (
     <div className='registercenter'>
     <div className="wrapper">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
         <h1>Register</h1>
         
         <div className="input-box">
