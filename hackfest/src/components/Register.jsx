@@ -2,6 +2,8 @@ import React from 'react';
 import { FaUserAlt, FaLock, FaEnvelope } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
 import './Register.css';
+import { useState } from 'react';
+import axios from 'axios';
 
 function Register({ onLoginClick }) {
   const { 
@@ -11,8 +13,15 @@ function Register({ onLoginClick }) {
     formState: { errors } 
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form Submitted", data);
+  const [username , setUsername] = useState('');
+  const [email , setEmail] = useState('');
+  const [password , setPassword] = useState('');
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:3001/register',{username, email, password})
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
   };
 
   return (
@@ -26,6 +35,7 @@ function Register({ onLoginClick }) {
             type="text" 
             placeholder='Username' 
             {...register("username", { required: "Username is required" })} 
+            onChange={(e) => setUsername(e.target.value)}
           />
           <FaUserAlt />
         </div>
@@ -42,6 +52,7 @@ function Register({ onLoginClick }) {
                 message: "Invalid email address" 
               }
             })} 
+            onChange={(e) => setEmail(e.target.value)}
           />
           <FaEnvelope />
         </div>
@@ -55,23 +66,12 @@ function Register({ onLoginClick }) {
               required: "Password is required", 
               minLength: { value: 6, message: "Password must be at least 6 characters" }
             })} 
+            onChange={(e) => setPassword(e.target.value)}
           />
           <FaLock />
         </div>
         {errors.password && <p className="error red">{errors.password.message}</p>}
 
-        <div className="input-box">
-          <input 
-            type="password" 
-            placeholder='Confirm Password' 
-            {...register("confirmPassword", { 
-              required: "Please confirm your password", 
-              validate: value => value === watch("password") || "Passwords do not match" 
-            })} 
-          />
-          <FaLock />
-        </div>
-        {errors.confirmPassword && <p className="error red">{errors.confirmPassword.message}</p>}
         
         <div className="terms">
           <label>
