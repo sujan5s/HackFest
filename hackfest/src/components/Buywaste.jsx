@@ -2,7 +2,7 @@ import React from 'react'
 
 function Buywaste() {
   return (
-    <div>Buywaste</div>
+    <div>Buywaste do</div>
   )
 }
 
