@@ -9,6 +9,7 @@ import About from './components/About'
 import Sellwaste from './components/Sellwaste';
 import Buywaste from './components/Buywaste';
 import Orderdetail from './components/Orderdetail';
+import Profile from './components/Profile';
 
 function App() {
 
@@ -40,6 +41,10 @@ function App() {
     {
       path: '/orderdetail',
       element: <><Navbar/><Orderdetail/></>
+    },
+    {
+      path: '/profile',
+      element: <><Navbar/><Profile/></>
     }
   ])
 
