@@ -1,26 +1,35 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import './Sellwaste.css';
+import { useState } from 'react';
+import axios from 'axios';
 
 function Sellwaste() {
   const {
     register,
-    handleSubmit,
     formState: { errors }
   } = useForm();
 
-  const onSubmit = (data) => {
-  //form submission
-    console.log("Product Data:", data);
-    //  API call 
-  };
+  const [productName, setProductName] = useState('');
+  const [productDescription, setProductDescription] = useState('');
+  const [productPrice, setProductPrice] = useState('');
+  const [productQuantity, setProductQuantity] = useState('');
+  const [productImage, setProductImage] = useState(null);
+
+  const handleSubmit = (e) => {
+  e.preventDefault();
+  axios.post('http://localhost:3001/sellwaste',{productName, productDescription, productPrice, productQuantity, productImage})
+  .then(res => console.log(res))
+  .catch(err => console.log(err));
+};
+
 
   return (
     <>
       <div className="sell">
       <h1>Please add your Selling waste details</h1>
       <div className="wrapper">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
       <div className="form first">
        <div className="details personal">
       <div className="fields">
@@ -33,6 +42,7 @@ function Sellwaste() {
                           message: "Product name must be at least 3 characters"
                         }
                       })}
+                      onChange={(e) => setProductName(e.target.value)}
                     />{errors.productName && <p className="error red">{errors.productName.message}</p>}
       </div>
       <div className="input-field">
@@ -45,6 +55,7 @@ function Sellwaste() {
                           message: "Description must be at least 10 characters"
                         }
                       })}
+                      onChange={(e) => setProductDescription(e.target.value)}
                     />
                     {errors.description && <p className="error red">{errors.description.message}</p>}
                   </div>
@@ -57,6 +68,7 @@ function Sellwaste() {
                           message: "Price cannot be negative"
                         }
                       })}
+                      onChange={(e) => setProductPrice(e.target.value)}
                     />{errors.price && <p className="error red">{errors.price.message}</p>}
                     </div>
        <div className="input-field">
@@ -68,6 +80,7 @@ function Sellwaste() {
                           message: "Quantity must be at least 1"
                         }
                       })}
+                      onChange={(e) => setProductQuantity(e.target.value)}
                     />
                     {errors.quantity && <p className="error red">{errors.quantity.message}</p>}
                   </div>
@@ -83,6 +96,7 @@ function Sellwaste() {
                             ) || "Only PNG, JPEG and GIF files are allowed",
                         }
                       })}
+                      onChange={(e) => setProductImage(e.target.files[0])}
                     />
                     {errors.image && <p className="error red">{errors.image.message}</p>}
                   </div>
