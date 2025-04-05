@@ -6,7 +6,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Register({ onLoginClick }) {
+function Register() {
   const { 
     register, 
     watch, 
@@ -22,7 +22,7 @@ function Register({ onLoginClick }) {
     e.preventDefault();
     axios.post('http://localhost:3001/register',{username, email, password})
     .then(res => {console.log(res)
-    navigate('/login')
+    navigate('/')
     })
     .catch(err => console.log(err));
   };
@@ -90,7 +90,8 @@ function Register({ onLoginClick }) {
           <p>Already have an account? 
             <a href="#" onClick={(e) => {
               e.preventDefault();
-              onLoginClick();
+              
+              navigate('/');
             }}>Login</a>
           </p>
         </div>

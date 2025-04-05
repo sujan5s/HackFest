@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';   
 import { useState } from 'react';
 
-function Login({ onRegisterClick }) {
+function Login() {
   const { 
     register,  
     formState: { errors } 
@@ -20,11 +20,11 @@ function Login({ onRegisterClick }) {
     e.preventDefault();
     axios.post('http://localhost:3001/login', { username, password })
       .then(res => {console.log(res);
-        if ( res.data.status === 'Success' ) {
+        if ( res.status === 200 && res.data === 'OK' ) {
           navigate('/home')
-        } else if ( res.data.status === 'incorrect password' ) {
+        } else if ( res.data === 'incorrect password' ) {
           alert("Incorrect password")
-        } else if ( res.data.status === 'User not found' ) {
+        } else if ( res.data === 'User not found' ) {
           alert("User not found")
         } else {
           alert("Something went wrong")
@@ -73,7 +73,8 @@ function Login({ onRegisterClick }) {
           <p>Don't have an account? 
             <a href="#" onClick={(e) => {
               e.preventDefault();
-              onRegisterClick();
+             
+              navigate('/register');
             }}> Register</a>
           </p>
         </div>
