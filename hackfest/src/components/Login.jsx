@@ -2,20 +2,41 @@ import React from 'react';
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import './Login.css';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';   
+import { useState } from 'react';
 
-function Login({ onRegisterClick }) {
+function Login() {
   const { 
-    register, 
-    handleSubmit, 
+    register,  
     formState: { errors } 
   } = useForm();
   
-  const onSubmit = data => console.log(data);
+  const [username , setUsername] = useState('');
+  const [password , setPassword] = useState('');
+  const navigate = useNavigate();
   
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:3001/login', { username, password })
+      .then(res => {console.log(res);
+        if ( res.status === 200 && res.data === 'OK' ) {
+          navigate('/home')
+        } else if ( res.data === 'incorrect password' ) {
+          alert("Incorrect password")
+        } else if ( res.data === 'User not found' ) {
+          alert("User not found")
+        } else {
+          alert("Something went wrong")
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
   return (
     <div className='logincenter'>
     <div className="wrapper">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit}>
         <h1>Login</h1>
         <div className="input-box">
           <input 
@@ -25,6 +46,7 @@ function Login({ onRegisterClick }) {
               minLength: { value: 3, message: "Minimum 3 characters required" },
               maxLength: { value: 30, message: "Maximum 30 characters allowed" }
             })} 
+            onChange={(e) => setUsername(e.target.value)}
           />
           <FaUserAlt />
           {errors.username && <p className='error-message red'>{errors.username.message}</p>}
@@ -37,6 +59,7 @@ function Login({ onRegisterClick }) {
               required: "Please enter your password", 
               minLength: { value: 8, message: "Password must be at least 8 characters long" }
             })} 
+            onChange={(e) => setPassword(e.target.value)}
           />
           <FaLock />
           {errors.password && <p className='error-message red'>{errors.password.message}</p>}
@@ -50,7 +73,8 @@ function Login({ onRegisterClick }) {
           <p>Don't have an account? 
             <a href="#" onClick={(e) => {
               e.preventDefault();
-              onRegisterClick();
+             
+              navigate('/register');
             }}> Register</a>
           </p>
         </div>

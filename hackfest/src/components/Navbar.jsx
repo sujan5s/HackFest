@@ -11,7 +11,7 @@ export default function Navbar() {
             logo
           </div>
           <div className='options'>
-            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/home">Home</NavLink></li>
             <li><NavLink to="/sellwaste">Sell waste</NavLink></li>
             <li><NavLink to="/buywaste">Buy waste</NavLink></li>
             <li><NavLink to="/orderdetail">Order details</NavLink></li>
@@ -19,8 +19,8 @@ export default function Navbar() {
             
           </div>
           <div className='profile'>
-          <li><NavLink to="/login">Login</NavLink></li>
-          <li><NavLink to="/register">Register</NavLink></li>
+          <li><NavLink to="/profile">Profile</NavLink></li>
+          
           </div>
           </div>
         </nav>
