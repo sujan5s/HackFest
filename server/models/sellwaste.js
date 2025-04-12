@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-import e from 'express';
-import * as buffer from 'vinyl-buffer';
+
 const SellWasteSchema = new mongoose.Schema({
     productName: {
         type: String,
@@ -19,10 +18,10 @@ const SellWasteSchema = new mongoose.Schema({
         required: true
     },
     productImage: {
-        data:Buffer,
-        contentType: String,
-        required: false
+        data: Buffer,
+        contentType: String
     },
+
 });
 
 const SellWasteModel = mongoose.model('Sellwaste', SellWasteSchema);

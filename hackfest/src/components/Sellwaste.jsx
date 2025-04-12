@@ -10,26 +10,46 @@ function Sellwaste() {
     formState: { errors }
   } = useForm();
 
+  const [successMsg, setSuccessMsg] = useState('');
+
   const [productName, setProductName] = useState('');
   const [productDescription, setProductDescription] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const [productQuantity, setProductQuantity] = useState('');
   const [productImage, setProductImage] = useState(null);
 
-  const handleSubmit = (e) => {
-  e.preventDefault();
-  axios.post('http://localhost:3001/sellwaste',{productName, productDescription, productPrice, productQuantity, productImage})
-  .then(res => console.log(res))
-  .catch(err => console.log(err));
-};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const formData = new FormData();
+    formData.append('productName', productName);
+    formData.append('productDescription', productDescription);
+    formData.append('productPrice', productPrice);
+    formData.append('productQuantity', productQuantity);
+    formData.append('productImage', productImage); // Add image file
+  
+    try {
+      const res = await axios.post('http://localhost:3001/sellwaste', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      setSuccessMsg('Added your waste details successfully');
 
+    
+      reset();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  
 
   return (
     <>
       <div className="sell">
       <h1>Please add your Selling waste details</h1>
       <div className="wrapper">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
       <div className="form first">
        <div className="details personal">
       <div className="fields">
@@ -106,6 +126,7 @@ function Sellwaste() {
                 <span className="btnText">Add Product</span>
                 <i className="uil uil-navigator"></i>
               </button>
+              {successMsg && <p className="success green">{successMsg}</p>}
             </div>
           </form>
         </div>
