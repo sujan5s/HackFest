@@ -5,6 +5,7 @@ const registerModel = require('./models/register.js');
 const SellWasteModel = require('./models/sellwaste.js'); // path depends on your file structure
 const multer= require('multer');
 
+
 const app = express();
 app.use(express.json());
 app.use(cors());
