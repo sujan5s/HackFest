@@ -10,7 +10,7 @@ import Sellwaste from './components/Sellwaste';
 import Buywaste from './components/Buywaste';
 import Orderdetail from './components/Orderdetail';
 import Profile from './components/Profile';
-import SchemeUpdates from "./components/SchemeUpdates";
+
 
 function App() {
 
@@ -51,10 +51,8 @@ function App() {
 
   return (
     <>
-      <div class="scheme-hub">
-      <h1>Farmer's Info Hub</h1>
-      <SchemeUpdates />
-    </div>
+      
+   
      <RouterProvider router={router}/>
       
     </>
