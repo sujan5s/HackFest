@@ -92,7 +92,7 @@ function Sellwaste() {
                     />{errors.price && <p className="error red">{errors.price.message}</p>}
                     </div>
        <div className="input-field">
-       <label>Product Quantity</label>
+       <label>Product Quantity (in KG)</label>
       <input type="number" placeholder="Enter your product quantity"  {...register("quantity", { 
                         required: "Quantity is required",
                         min: {
