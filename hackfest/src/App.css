@@ -36,3 +36,11 @@ body {
   background-size: cover;  
   background-attachment: fixed;
 }
+
+.scheme-hub{
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+}
