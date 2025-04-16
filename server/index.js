@@ -71,6 +71,17 @@ app.post('/sellwaste', upload.single('productImage'), async (req, res) => {
     }
 });
 
+app.get('/sellwaste', async (req, res) => {
+    try {
+        const wastes = await SellWasteModel.find();
+        res.json(wastes);
+    } catch (err) {
+        console.error('Error fetching wastes:', err);
+        res.status(500).json({ error: 'Failed to fetch wastes', details: err.message });
+    }
+}
+);
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server started on port ${3001}`);
