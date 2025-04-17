@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import './Sellwaste.css';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Sellwaste() {
   const {
@@ -11,6 +12,7 @@ function Sellwaste() {
   } = useForm();
 
   const [successMsg, setSuccessMsg] = useState('');
+  const navigate = useNavigate();
 
   const [productName, setProductName] = useState('');
   const [productDescription, setProductDescription] = useState('');
@@ -27,6 +29,18 @@ function Sellwaste() {
     formData.append('productPrice', productPrice);
     formData.append('productQuantity', productQuantity);
     formData.append('productImage', productImage); // Add image file
+
+    const goToAddressPage = () => {
+      const product = {
+        productNamename: {productName},
+        productDescription: {productDescription},
+        productPrice: {productPrice},
+        productQuantity: {productQuantity},
+        productImage: {productImage},
+      };
+
+    navigate('/address', { state: product });
+    };
   
     try {
       const res = await axios.post('http://localhost:3001/sellwaste', formData, {
