@@ -21,24 +21,34 @@ const upload = multer({ storage: storage,
     }
  });
 
-app.post('/login',(req,res)=>{
-    const {username,password} = req.body;
-    registerModel.findOne({username : username})
-    .then(user => {
-        if(user){
-            if(user.password === password){
-                res.json("OK")
-            }else{
-                res.json("incorrect password")
-            }
+ app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+  
+    registerModel.findOne({ username: username })
+      .then(user => {
+        if (user) {
+          if (user.password === password) {
+            res.json({
+              message: "OK",
+              user: {
+                id: user._id,
+                username: user.username,
+                name: user.name,
+                email: user.email
+              }
+            });
+          } else {
+            res.json("incorrect password");
+          }
         } else {
-            res.json("User not found")
+          res.json("User not found");
         }
-    })
-    .catch(err => {
+      })
+      .catch(err => {
         res.status(500).json({ error: "Server error", details: err });
-    });
-})
+      });
+  });
+  
 
 app.post('/register',(req,res)=>{
     registerModel.create(req.body)
@@ -106,6 +116,24 @@ app.post('/address', async (req, res) => {
     } catch (err) {
       console.error('Error saving address:', err);
       res.status(500).json({ error: 'Failed to save waste', details: err.message });
+    }
+  });
+  
+
+
+app.get('/profile', async (req, res) => {
+    try {
+      const userId = req.query.id; 
+  
+      if (!userId) return res.status(400).json({ message: 'User ID missing' });
+  
+      const user = await registerModel.findById(userId).select('username name email');
+
+      if (!user) return res.status(404).json({ message: 'User not found' });
+  
+      res.json(user);
+    } catch (err) {
+      res.status(500).json({ message: 'Server error', error: err });
     }
   });
   
