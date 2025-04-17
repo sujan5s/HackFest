@@ -23,8 +23,10 @@ function Login() {
         console.log("Login response:", res);
 
         if (res.status === 200 && res.data.message === 'OK') {
-          const userId = res.data.user.id;
-          navigate('/profile', { state: { userId } });
+          
+          localStorage.setItem('userId', res.data.user.id);
+          navigate('/home');
+          
 
         } else if (res.data === 'incorrect password') {
           alert("Incorrect password");
