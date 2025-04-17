@@ -84,24 +84,31 @@ app.get('/sellwaste', async (req, res) => {
 );
 
 /*address backend */
-app.post('/address',async (req, res) => {
+app.post('/address', async (req, res) => {
     try {
-        console.log('Incoming data:', req.body);
-        const newaddress = new AddressModel({
-            name: req.body.name,
-            address: req.body.address,
-            pincode: Number(req.body.pincode),
-            phoneno: Number(req.body.phoneno),
-
-        });
-
-        const savedaddress = await newaddress.save();
-        res.status(201).json(savedaddress);
+      console.log('Incoming data:', req.body);
+      
+      const newaddress = new AddressModel({
+        name: req.body.name,
+        address: req.body.address,
+        pincode: req.body.pincode,
+        phoneno: req.body.phoneno,
+        productName: req.body.productName,
+        productDescription: req.body.productDescription,
+        productPrice: req.body.productPrice,
+        productQuantity: req.body.productQuantity,
+        productImage: req.body.productImage,
+      });
+  
+      const savedaddress = await newaddress.save();
+      res.status(201).json(savedaddress);
+  
     } catch (err) {
-        console.error('Error saving address:', err);
-        res.status(500).json({ error: 'Failed to save waste', details: err.message });
+      console.error('Error saving address:', err);
+      res.status(500).json({ error: 'Failed to save waste', details: err.message });
     }
-});
+  });
+  
 
 
 const PORT = process.env.PORT || 3001;
