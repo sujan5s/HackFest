@@ -10,7 +10,7 @@ import Sellwaste from './components/Sellwaste';
 import Buywaste from './components/Buywaste';
 import Orderdetail from './components/Orderdetail';
 import Profile from './components/Profile';
-
+import Address from './components/Address';
 
 function App() {
 
@@ -46,6 +46,10 @@ function App() {
     {
       path: '/profile',
       element: <><Navbar/><Profile/></>
+    },
+    {
+      path: '/address',
+      element: <><Navbar/><Address/></>
     }
   ])
 
