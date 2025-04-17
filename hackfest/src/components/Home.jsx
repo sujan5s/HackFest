@@ -4,20 +4,6 @@ import sunny from "../images/sunny.png";
 import SchemeUpdates from "./SchemeUpdates";
 import { useLocation, useNavigate } from 'react-router-dom';
 
-<<<<<<< HEAD
-=======
-function Home() {
-  const navigate = useNavigate();
-  const location = useLocation();
- 
-  const userId = location.state?.userId;
-
-  return (
-    <div>
-    
-      <h1>Home </h1>
-      
->>>>>>> 9a36478f99a0c04621c59f5d7b2bdf86071fdaf0
 
 const WeatherApp = () => {
   const [location, setLocation] = useState("");
