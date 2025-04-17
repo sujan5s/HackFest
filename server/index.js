@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const registerModel = require('./models/register.js');
 const SellWasteModel = require('./models/sellwaste.js'); // path depends on your file structure
+const AddressModel = require('./models/address.js');
 const multer= require('multer');
 
 
@@ -70,6 +71,38 @@ app.post('/sellwaste', upload.single('productImage'), async (req, res) => {
         res.status(500).json({ error: 'Failed to save waste', details: err.message });
     }
 });
+
+app.get('/sellwaste', async (req, res) => {
+    try {
+        const wastes = await SellWasteModel.find();
+        res.json(wastes);
+    } catch (err) {
+        console.error('Error fetching wastes:', err);
+        res.status(500).json({ error: 'Failed to fetch wastes', details: err.message });
+    }
+}
+);
+
+/*address backend */
+app.post('/address',async (req, res) => {
+    try {
+        console.log('Incoming data:', req.body);
+        const newaddress = new AddressModel({
+            name: req.body.name,
+            address: req.body.address,
+            pincode: Number(req.body.pincode),
+            phoneno: Number(req.body.phoneno),
+
+        });
+
+        const savedaddress = await newaddress.save();
+        res.status(201).json(savedaddress);
+    } catch (err) {
+        console.error('Error saving address:', err);
+        res.status(500).json({ error: 'Failed to save waste', details: err.message });
+    }
+});
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
