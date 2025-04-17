@@ -4,9 +4,13 @@ import './Sellwaste.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function Address() {
 
+  const location = useLocation();
+const product = location.state || {};
+  
     const {
         register,
         formState: { errors }
@@ -28,10 +32,21 @@ function Address() {
             address,
             pincode,
             phoneno,
+            productName: product.productName,
+            productDescription: product.productDescription, 
+            productPrice: product.productPrice,
+            productQuantity: product.productQuantity,
+            productImage: product.productImage,
           };
           
-          const res = await axios.post('http://localhost:3001/address', data);
-          navigate('/oplaced');
+          try {
+            const res = await axios.post('http://localhost:3001/address', data);
+            setSuccessMsg('Added your waste details successfully');
+            navigate('/oplaced');
+          } catch (err) {
+            console.error("Error submitting form:", err);
+          }
+          
       };
 
   return (
