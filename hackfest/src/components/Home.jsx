@@ -12,9 +12,6 @@ function Home() {
  
   const userId = location.state?.userId;
 
-  const goToProfile = () => {
-    navigate('/profile', { state: { userId } });
-  };
   return (
     <div>
     

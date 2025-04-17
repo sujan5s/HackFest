@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function Profile() {
-  const location = useLocation();
-  const userId = location.state?.userId; 
+  const userId = localStorage.getItem('userId');
+
 
   const [user, setUser] = useState({
     username: '',
