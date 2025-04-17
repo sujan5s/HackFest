@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import './Sellwaste.css';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Address() {
 
@@ -12,6 +13,7 @@ function Address() {
       } = useForm();
     
       const [successMsg, setSuccessMsg] = useState('');
+        const navigate = useNavigate();
     
       const [name, setname] = useState('');
       const [address, setaddress] = useState('');
@@ -29,7 +31,7 @@ function Address() {
           };
           
           const res = await axios.post('http://localhost:3001/address', data);
-          
+          navigate('/oplaced');
       };
 
   return (

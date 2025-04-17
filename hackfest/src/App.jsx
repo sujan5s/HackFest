@@ -11,6 +11,7 @@ import Buywaste from './components/Buywaste';
 import Orderdetail from './components/Orderdetail';
 import Profile from './components/Profile';
 import Address from './components/Address';
+import Oplaced from './components/Oplaced';
 
 function App() {
 
@@ -50,6 +51,10 @@ function App() {
     {
       path: '/address',
       element: <><Navbar/><Address/></>
+    },
+    {
+      path: '/oplaced',
+      element: <><Navbar/><Oplaced/></>
     }
   ])
 
