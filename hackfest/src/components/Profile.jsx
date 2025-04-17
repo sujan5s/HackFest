@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
   const userId = localStorage.getItem('userId');
-
+  const navigate = useNavigate();
+  const btn = () => {
+    localStorage.removeItem('userId');
+    navigate('/');
+  }
 
   const [user, setUser] = useState({
     username: '',
@@ -33,6 +37,7 @@ function Profile() {
   }, [userId]);
 
   return (
+    <>
     <div style={styles.container}>
       <h2 style={styles.heading}>Profile</h2>
       <div style={styles.infoBox}>
@@ -40,6 +45,8 @@ function Profile() {
         <p><strong>Email:</strong> {user.email}</p>
       </div>
     </div>
+    <button onClick={btn}>Log out</button>
+    </>
   );
 }
 
