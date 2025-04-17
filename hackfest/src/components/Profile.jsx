@@ -68,5 +68,16 @@ const styles = {
   infoBox: {
     fontSize: '1.1rem',
     lineHeight: '1.8'
+  },
+  button:{
+    padding: '0.5rem 1rem',
+    backgroundColor: '#007BFF',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    fontSize: '1rem',
+    alignItem:'center',
+    marginTop: '1rem',s
   }
 };
