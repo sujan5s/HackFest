@@ -78,6 +78,6 @@ const styles = {
     cursor: 'pointer',
     fontSize: '1rem',
     alignItem:'center',
-    marginTop: '1rem',s
+    marginTop: '1rem',
   }
 };
