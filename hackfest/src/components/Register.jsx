@@ -3,8 +3,8 @@ import { FaUserAlt, FaLock, FaEnvelope } from "react-icons/fa";
 import { useForm } from 'react-hook-form';
 import './Register.css';
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from '../utils/axiosInstance';
 
 function Register() {
   const { 
@@ -18,13 +18,19 @@ function Register() {
   const [password , setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/register',{username, email, password})
-    .then(res => {console.log(res)
-    navigate('/')
-    })
-    .catch(err => console.log(err));
+    try {
+      const res = await axios.post('/auth/register', {
+        username,
+        password,
+        name,
+        email
+      });
+      console.log(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
